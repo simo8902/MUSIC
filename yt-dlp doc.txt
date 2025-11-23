@@ -1,0 +1,37 @@
+ffmpeg -i "Title.mp4" -vn -acodec copy "Title.m4a"
+for mp3: ffmpeg -i "Title.mp4" -vn -codec:a libmp3lame -qscale:a 0 "Title.mp3"
+
+shows how much videos are there:
+yt-dlp --flat-playlist "https://www.youtube.com/@prod.kasper/videos" | Measure-Object -Line
+
+SAMPLE of downloading whole channel videos/shorts etc:
+GET ID:
+ yt-dlp --print "%(channel_id)s" "https://www.youtube.com/@prod.kasper"
+
+WARNING: Change UC TO UU before downloading!!!
+
+make cmd with this ID:
+ yt-dlp --cookies-from-browser firefox --lazy-playlist --no-playlist --download-archive downloaded.txt -f 140 --ignore-errors "https://www.youtube.com/playlist?list=UUNSbg05iWWTm8ugPabBnq_w"
+
+yt-dlp --cookies cookies.txt --extractor-args "youtube:player_client=default" --flat-playlist --get-id "https://www.youtube.com/@proddtokyo/videos" | ForEach-Object { yt-dlp -f 140 --ignore-errors --no-warnings --download-archive dwndlist.txt "https://www.youtube.com/watch?v=$_" }
+
+WARNING NOT ALL SONGS CAN DOWNLOAD CORRECTLY
+ERROR: [youtube] b5FoFGe3BFY: Requested format is not available. Use --list-formats for a list of available formats.
+Identify the ID (b5FoFGe3BFY) and download it manually using mp4 then convert to desired format
+
+AUDIO FORMATS:
+-f 140 m4a AAC ~128kbps (BEST MOBILE AUDIO)
+-f 251 webm OPUS ~160-180kbps (BEST PC AUDIO)
+-f bestaudio auto best available bitrate
+-f bestaudio[ext=m4a] best m4a - Ensures it's iPhone/Android compatible
+--extract-audio --audio-format mp3 convert after
+
+VIDEO FORMATS:
+-f 137 1080p mp4 high-res no audio
+-f 248 1080p webm same
+-f bestvideo highest only video
+
+COMBINED:
+-f 18 360p mp4 low quality
+-f 22 720p mp4 decent quality
+-f best highest any auto-picks best video+audio
