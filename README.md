@@ -6,7 +6,7 @@ yt-dlp, ffmpeg, node.js, typescript, bgutil
 ```
 
 dont worry the script is not that complicated
-
+the script from today update DOESNT use COOKIES, take that in mind but it is still tracable, use vpn if needed
 here instructions for every case:
 ```
 git clone https://github.com/Brainicism/bgutil-ytdlp-pot-provider.git
